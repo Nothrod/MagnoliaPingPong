@@ -1,178 +1,28 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/**
+ * ============================================================================
+ * Magnolia Ping Pong - Styles de la Page Historique des Matchs (Public)
+ * ============================================================================
+ * 
+ * Ce fichier gère :
+ * - Les statistiques rapides en cartes
+ * - Les filtres de recherche et tri
+ * - Les cartes de matchs avec animation
+ * - Le modal de détails
+ * - Les états de chargement et vide
+ * 
+ * Thème : Noir et Or (cohérent avec le reste de l'application)
+ * 
+ * @author Magnolia Ping Pong
+ * @version 2.0.0
+ * ============================================================================
+ */
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
-  min-height: 100vh;
-  color: #f5f5f5;
-}
-
-/* ========================================
-   HEADER
-======================================== */
-.main-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(13, 13, 13, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 2px solid #FFD700;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  transition: transform 0.3s;
-}
-
-.logo:hover {
-  transform: scale(1.05);
-}
-
-.logo-icon {
-  font-size: 32px;
-  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
-}
-
-.logo-text {
-  font-size: 24px;
-  font-weight: bold;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 1px;
-}
-
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  color: #a0a0a0;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.3s;
-  position: relative;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: #FFD700;
-  transition: all 0.3s;
-  transform: translateX(-50%);
-}
-
-.nav-link:hover {
-  color: #FFD700;
-  background: rgba(255, 215, 0, 0.08);
-}
-
-.nav-link:hover::before {
-  width: 80%;
-}
-
-.nav-link.active {
-  color: #FFD700;
-  background: rgba(255, 215, 0, 0.12);
-}
-
-.nav-link.active::before {
-  width: 80%;
-}
-
-.nav-icon {
-  font-size: 18px;
-}
-
-.btn-admin {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #0d0d0d !important;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
-}
-
-.btn-admin:hover {
-  background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
-}
-
-.burger-menu {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  z-index: 101;
-}
-
-.burger-menu span {
-  display: block;
-  width: 28px;
-  height: 3px;
-  background: #FFD700;
-  border-radius: 3px;
-  transition: all 0.3s;
-}
-
-.burger-menu.active span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
-
-.burger-menu.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.burger-menu.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
-
-/* ========================================
+/* ============================================================================
    CONTENU PRINCIPAL
-======================================== */
+   ============================================================================ */
+
 .matches-page {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 40px 20px;
 }
@@ -190,16 +40,19 @@ body {
   background-clip: text;
   margin-bottom: 10px;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .subtitle {
   color: #a0a0a0;
   font-size: 16px;
+  font-style: italic;
 }
 
-/* ========================================
+/* ============================================================================
    STATS RAPIDES
-======================================== */
+   ============================================================================ */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -210,13 +63,13 @@ body {
 .stat-card {
   background: #1a1a1a;
   padding: 25px;
-  border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 15px;
   border: 1px solid #2d2d2d;
   border-left: 4px solid #FFD700;
   transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .stat-card:hover {
@@ -228,6 +81,10 @@ body {
 .stat-icon {
   font-size: 36px;
   filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+}
+
+.stat-info {
+  flex: 1;
 }
 
 .stat-value {
@@ -245,15 +102,17 @@ body {
   margin-top: 4px;
 }
 
-/* ========================================
+/* ============================================================================
    FILTRES
-======================================== */
+   ============================================================================ */
+
 .filters-section {
   background: #1a1a1a;
   padding: 25px;
   border-radius: 12px;
   margin-bottom: 30px;
   border: 1px solid #2d2d2d;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .filters {
@@ -298,9 +157,10 @@ body {
   color: #555;
 }
 
-/* ========================================
+/* ============================================================================
    LOADING STATE
-======================================== */
+   ============================================================================ */
+
 .loading-state {
   text-align: center;
   padding: 60px 20px;
@@ -326,9 +186,10 @@ body {
   font-size: 16px;
 }
 
-/* ========================================
+/* ============================================================================
    CARTES DE MATCHS
-======================================== */
+   ============================================================================ */
+
 .matches-list {
   display: flex;
   flex-direction: column;
@@ -343,6 +204,8 @@ body {
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .match-card::before {
@@ -357,30 +220,36 @@ body {
 
 .match-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
   border-color: #FFD700;
 }
 
-.match-date {
+.match-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.match-date {
   color: #a0a0a0;
   font-size: 14px;
-  margin-bottom: 20px;
-  padding-left: 15px;
+  font-style: italic;
 }
 
-.date-icon {
-  font-size: 16px;
+.match-id {
+  color: #666;
+  font-size: 12px;
+  font-family: monospace;
 }
 
-.match-players {
+.match-body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: 20px;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .player {
@@ -388,136 +257,76 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
   transition: all 0.3s;
-  position: relative;
+  background: #0d0d0d;
+  border: 2px solid #2d2d2d;
 }
 
 .player.winner {
   background: rgba(255, 215, 0, 0.08);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-}
-
-.player.loser {
-  opacity: 0.7;
-}
-
-.player-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #0d0d0d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-}
-
-.player.loser .player-avatar {
-  background: #2d2d2d;
-  color: #a0a0a0;
-  box-shadow: none;
-}
-
-.player-info {
-  text-align: center;
+  border-color: #FFD700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
 }
 
 .player-name {
   font-size: 18px;
   font-weight: bold;
   color: #f5f5f5;
-  margin-bottom: 4px;
+  text-align: center;
 }
 
 .player.winner .player-name {
   color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
-.player-elo {
-  font-size: 14px;
-  color: #a0a0a0;
-}
-
-.elo-change {
-  font-weight: bold;
-  font-size: 13px;
-  margin-left: 4px;
-}
-
-.elo-change.positive { color: #10b981; }
-.elo-change.negative { color: #ef4444; }
-
-.badge {
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.badge-winner {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #0d0d0d;
-}
-
-.vs-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.vs {
-  font-size: 20px;
-  font-weight: bold;
-  color: #FFA500;
-  text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
-  letter-spacing: 2px;
-}
-
-.score {
-  font-size: 28px;
+.player-score {
+  font-size: 32px;
   font-weight: bold;
   color: #FFD700;
   background: #0d0d0d;
   padding: 8px 20px;
   border-radius: 8px;
   border: 2px solid #2d2d2d;
-  min-width: 100px;
-  text-align: center;
 }
 
-.btn-details {
-  width: 100%;
-  padding: 12px;
-  background: transparent;
-  color: #FFD700;
-  border: 2px solid #FFD700;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.player.winner .player-score {
+  border-color: #FFD700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.player-elo {
   font-size: 14px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 12px;
 }
 
-.btn-details:hover {
-  background: #FFD700;
-  color: #0d0d0d;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+.player-elo.positive {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
 }
 
-/* ========================================
+.player-elo.negative {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.vs {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFA500;
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+  letter-spacing: 2px;
+  padding: 10px;
+}
+
+/* ============================================================================
    ÉTAT VIDE
-======================================== */
+   ============================================================================ */
+
 .empty-state {
   text-align: center;
   padding: 60px 20px;
@@ -535,15 +344,18 @@ body {
 .empty-state h3 {
   color: #FFD700;
   margin-bottom: 10px;
+  font-size: 24px;
 }
 
 .empty-state p {
   color: #a0a0a0;
+  font-size: 16px;
 }
 
-/* ========================================
+/* ============================================================================
    MODAL
-======================================== */
+   ============================================================================ */
+
 .modal {
   display: none;
   position: fixed;
@@ -587,17 +399,22 @@ body {
 .modal-header h2 {
   color: #FFD700;
   font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .close {
   color: #a0a0a0;
   font-size: 32px;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: all 0.3s;
   line-height: 1;
 }
 
-.close:hover { color: #ef4444; }
+.close:hover {
+  color: #ef4444;
+  transform: rotate(90deg);
+}
 
 .modal-body {
   padding: 25px;
@@ -607,102 +424,132 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
+  padding: 15px 0;
   border-bottom: 1px solid #2d2d2d;
 }
 
-.detail-row:last-child { border-bottom: none; }
+.detail-row:last-child {
+  border-bottom: none;
+}
 
 .detail-label {
   color: #a0a0a0;
   font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .detail-value {
   color: #f5f5f5;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .score-big {
-  font-size: 24px;
+  font-size: 28px;
   color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 .winner-text {
   color: #FFD700;
+  font-size: 18px;
 }
 
-.positive { color: #10b981; }
-.negative { color: #ef4444; }
+.positive {
+  color: #10b981;
+  font-weight: bold;
+}
 
-/* ========================================
+.negative {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+/* ============================================================================
    RESPONSIVE
-======================================== */
+   ============================================================================ */
+
 @media (max-width: 768px) {
-  .burger-menu { display: flex; }
-  
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    max-width: 300px;
-    height: 100vh;
-    background: #1a1a1a;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 80px 20px 20px;
-    gap: 5px;
-    transition: right 0.3s ease;
-    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
-    border-left: 2px solid #FFD700;
+  .matches-page {
+    padding: 20px 15px;
   }
   
-  .nav-menu.active { right: 0; }
-  
-  .nav-link,
-  .btn-admin {
-    justify-content: flex-start;
-    padding: 15px 20px;
-    border-radius: 8px;
+  .page-header h1 {
+    font-size: 32px;
   }
   
-  .nav-link::before { display: none; }
-  
-  .nav-link.active {
-    background: rgba(255, 215, 0, 0.15);
-    border-left: 3px solid #FFD700;
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
   
-  .page-header h1 { font-size: 32px; }
+  .stat-card {
+    padding: 20px;
+  }
   
-  .match-players {
+  .stat-value {
+    font-size: 24px;
+  }
+  
+  .filters {
+    grid-template-columns: 1fr;
+  }
+  
+  .match-body {
     grid-template-columns: 1fr;
     gap: 15px;
   }
   
-  .vs-section {
-    flex-direction: row;
-    justify-content: center;
-    gap: 15px;
-  }
-  
-  .player {
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 15px;
-    text-align: left;
-  }
-  
-  .player-info { text-align: left; }
-  
-  .player-avatar {
-    width: 50px;
-    height: 50px;
+  .vs {
+    text-align: center;
     font-size: 20px;
   }
   
-  .player-name { font-size: 16px; }
+  .player {
+    padding: 15px;
+  }
   
-  .score { font-size: 22px; padding: 6px 15px; }
+  .player-name {
+    font-size: 16px;
+  }
+  
+  .player-score {
+    font-size: 24px;
+    padding: 6px 15px;
+  }
+  
+  .modal-content {
+    width: 95%;
+    margin: 5% auto;
+  }
+  
+  .modal-header {
+    padding: 15px 20px;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-header h1 {
+    font-size: 28px;
+  }
+  
+  .match-card {
+    padding: 20px 15px;
+  }
 }

@@ -1,163 +1,153 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- Métadonnées de base -->
+  <!-- ==================================================================== -->
+  <!-- Magnolia Ping Pong - Historique Public des Matchs                    -->
+  <!-- ==================================================================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Historique des matchs de ping-pong avec suivi Elo">
-  <title>Matchs - EloTracker</title>
+  <title>Matchs - Magnolia PingPong</title>
   
-  <!-- Styles -->
+  <!-- ==================================================================== -->
+  <!-- FEUILLES DE STYLE                                                    -->
+  <!-- ==================================================================== -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/matchs.css">
 </head>
 <body>
 
-  <!-- ============================================ -->
-  <!-- HEADER / NAVIGATION PRINCIPALE               -->
-  <!-- ============================================ -->
-  <header class="main-header">
-    <div class="header-container">
-      <!-- Logo avec lien vers l'accueil -->
-      <a href="/" class="logo">
-        <span class="logo-icon">🏆</span>
-        <span class="logo-text">EloTracker</span>
-      </a>
-      
-      <!-- Menu de navigation -->
+<!-- ==================================================================== -->
+<!-- NAVIGATION DYNAMIQUE                                                 -->
+<!-- ==================================================================== -->
 <div id="nav-placeholder"></div>
-      
-      <!-- Menu burger pour mobile -->
-      <button class="burger-menu" id="burgerMenu" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+
+<!-- ==================================================================== -->
+<!-- CONTENU PRINCIPAL                                                    -->
+<!-- ==================================================================== -->
+<main class="matches-page">
+    <div class="container">
+        
+        <!-- ============================================================ -->
+        <!-- EN-TÊTE DE PAGE                                              -->
+        <!-- ============================================================ -->
+        <div class="page-header">
+            <h1>⚔️ Historique des Matchs</h1>
+            <p class="subtitle">Retrouve tous les affrontements et leurs résultats</p>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECTION STATISTIQUES RAPIDES                                 -->
+        <!-- ============================================================ -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-info">
+                    <div class="stat-value" id="totalMatches">0</div>
+                    <div class="stat-label">Matchs totaux</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-info">
+                    <div class="stat-value" id="todayMatches">0</div>
+                    <div class="stat-label">Aujourd'hui</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">👑</div>
+                <div class="stat-info">
+                    <div class="stat-value" id="topPlayer">-</div>
+                    <div class="stat-label">Plus de victoires</div>
+                </div>
+            </div>
+            
+<!-- Meilleure série de victoires -->
+<div class="stat-card" id="streakCard">
+    <div class="stat-icon">🔥</div>
+    <div class="stat-info">
+        <div class="stat-value" id="streakPlayer">-</div>
+        <div class="stat-label" id="streakCount">0</div>
     </div>
-  </header>
+</div>
+        </section>
 
-  <!-- ============================================ -->
-  <!-- CONTENU PRINCIPAL                            -->
-  <!-- ============================================ -->
-  <main class="matches-page">
-    <!-- En-tête de page -->
-    <div class="page-header">
-      <h1>⚔️ Historique des Matchs</h1>
-      <p class="subtitle">Retrouve tous les affrontements et leurs résultats</p>
-    </div>
+        <!-- ============================================================ -->
+        <!-- SECTION FILTRES                                              -->
+        <!-- ============================================================ -->
+        <section class="filters-section">
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="searchPlayer">🔍 Joueur</label>
+                    <input type="text" id="searchPlayer" placeholder="Rechercher un joueur...">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filterDate">📅 Période</label>
+                    <select id="filterDate">
+                        <option value="all">Tous les matchs</option>
+                        <option value="today">Aujourd'hui</option>
+                        <option value="week">Cette semaine</option>
+                        <option value="month">Ce mois</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sortBy">🔃 Trier par</label>
+                    <select id="sortBy">
+                        <option value="date-desc">Plus récents</option>
+                        <option value="date-asc">Plus anciens</option>
+                        <option value="elo">Plus gros écarts Elo</option>
+                    </select>
+                </div>
+            </div>
+        </section>
 
-    <!-- ============================================ -->
-    <!-- SECTION STATISTIQUES RAPIDES                 -->
-    <!-- ============================================ -->
-    <section class="stats-grid">
-      <!-- Total des matchs -->
-      <div class="stat-card">
-        <div class="stat-icon">🎯</div>
-        <div class="stat-info">
-          <div class="stat-value" id="totalMatches">0</div>
-          <div class="stat-label">Matchs totaux</div>
-        </div>
-      </div>
-      
-      <!-- Matchs du jour -->
-      <div class="stat-card">
-        <div class="stat-icon">🔥</div>
-        <div class="stat-info">
-          <div class="stat-value" id="todayMatches">0</div>
-          <div class="stat-label">Aujourd'hui</div>
-        </div>
-      </div>
-      
-      <!-- Joueur avec le plus de victoires -->
-      <div class="stat-card">
-        <div class="stat-icon">👑</div>
-        <div class="stat-info">
-          <div class="stat-value" id="topPlayer">-</div>
-          <div class="stat-label">Plus de victoires</div>
-        </div>
-      </div>
-      
-      <!-- Elo moyen -->
-      <div class="stat-card">
-        <div class="stat-icon">⚡</div>
-        <div class="stat-info">
-          <div class="stat-value" id="avgElo">0</div>
-          <div class="stat-label">Elo moyen</div>
-        </div>
-      </div>
-    </section>
+        <!-- ============================================================ -->
+        <!-- LISTE DES MATCHS                                             -->
+        <!-- ============================================================ -->
+        <section class="matches-list" id="matchesList">
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Chargement des matchs...</p>
+            </div>
+        </section>
 
-    <!-- ============================================ -->
-    <!-- SECTION FILTRES                              -->
-    <!-- ============================================ -->
-    <section class="filters-section">
-      <div class="filters">
-        <!-- Filtre par joueur -->
-        <div class="filter-group">
-          <label for="searchPlayer">🔍 Joueur</label>
-          <input type="text" id="searchPlayer" placeholder="Rechercher un joueur...">
+        <!-- ============================================================ -->
+        <!-- ÉTAT VIDE                                                    -->
+        <!-- ============================================================ -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-icon">🎮</div>
+            <h3>Aucun match trouvé</h3>
+            <p>Essaie de modifier tes filtres</p>
         </div>
         
-        <!-- Filtre par période -->
-        <div class="filter-group">
-          <label for="filterDate">📅 Période</label>
-          <select id="filterDate">
-            <option value="all">Tous les matchs</option>
-            <option value="today">Aujourd'hui</option>
-            <option value="week">Cette semaine</option>
-            <option value="month">Ce mois</option>
-          </select>
-        </div>
-        
-        <!-- Tri des matchs -->
-        <div class="filter-group">
-          <label for="sortBy">🔃 Trier par</label>
-          <select id="sortBy">
-            <option value="date-desc">Plus récents</option>
-            <option value="date-asc">Plus anciens</option>
-            <option value="elo">Plus gros écarts Elo</option>
-          </select>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- LISTE DES MATCHS                             -->
-    <!-- ============================================ -->
-    <section class="matches-list" id="matchesList">
-      <!-- État de chargement -->
-      <div class="loading-state">
-        <div class="loading-spinner"></div>
-        <p>Chargement des matchs...</p>
-      </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- ÉTAT VIDE (aucun match trouvé)               -->
-    <!-- ============================================ -->
-    <div class="empty-state" id="emptyState" style="display: none;">
-      <div class="empty-icon">🎮</div>
-      <h3>Aucun match trouvé</h3>
-      <p>Essaie de modifier tes filtres</p>
     </div>
-  </main>
+</main>
 
-  <!-- ============================================ -->
-  <!-- MODAL DÉTAIL D'UN MATCH                      -->
-  <!-- ============================================ -->
-  <div class="modal" id="matchModal">
+<!-- ==================================================================== -->
+<!-- MODAL DÉTAIL D'UN MATCH                                              -->
+<!-- ==================================================================== -->
+<div class="modal" id="matchModal">
     <div class="modal-content">
-      <div class="modal-header">
-        <h2>📋 Détails du match</h2>
-        <span class="close" id="closeModal">&times;</span>
-      </div>
-      <div class="modal-body" id="modalBody">
-        <!-- Contenu dynamique injecté par matchs.js -->
-      </div>
+        <div class="modal-header">
+            <h2>📋 Détails du match</h2>
+            <span class="close" id="closeModal">&times;</span>
+        </div>
+        <div class="modal-body" id="modalBody">
+            <!-- Contenu dynamique -->
+        </div>
     </div>
-  </div>
+</div>
 
-  <!-- Script JavaScript -->
-  <script src="matchs.js"></script>
+<!-- ==================================================================== -->
+<!-- SCRIPTS                                                              -->
+<!-- ==================================================================== -->
 <script src="/js/nav.js"></script>
+<script src="/js/matchs.js"></script>
+
 </body>
 </html>

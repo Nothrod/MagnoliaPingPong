@@ -1,0 +1,185 @@
+/**
+ * ============================================================================
+ * Magnolia Ping Pong - Styles du Modal de Confirmation
+ * ============================================================================
+ * 
+ * Ce fichier gère :
+ * - Le style du modal de confirmation personnalisé
+ * - Les animations d'ouverture/fermeture
+ * - Le design responsive
+ * 
+ * Thème : Noir et Or (cohérent avec le reste de l'application)
+ * 
+ * @author Magnolia Ping Pong
+ * @version 1.0.0
+ * ============================================================================
+ */
+
+/* ============================================================================
+   OVERLAY (fond semi-transparent)
+   ============================================================================ */
+.confirm-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 9998;
+  animation: fadeIn 0.2s ease-out;
+  backdrop-filter: blur(4px);
+}
+
+.confirm-modal-overlay.active {
+  display: block;
+}
+
+/* ============================================================================
+   MODAL
+   ============================================================================ */
+.confirm-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: #1a1a1a;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2), 0 0 0 1px #2d2d2d;
+  border-top: 3px solid #FFD700;
+  padding: 30px;
+  min-width: 350px;
+  max-width: 500px;
+  z-index: 9999;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.confirm-modal.active {
+  display: block;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ============================================================================
+   ICÔNE
+   ============================================================================ */
+.confirm-modal-icon {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 20px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ============================================================================
+   TITRE ET MESSAGE
+   ============================================================================ */
+.confirm-modal-title {
+  color: #FFD700;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.confirm-modal-message {
+  color: #f5f5f5;
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.confirm-modal-warning {
+  color: #ef4444;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 25px;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* ============================================================================
+   BOUTONS
+   ============================================================================ */
+.confirm-modal-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.confirm-modal-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 120px;
+}
+
+.confirm-modal-btn-cancel {
+  background: #2d2d2d;
+  color: #a0a0a0;
+  border: 2px solid #2d2d2d;
+}
+
+.confirm-modal-btn-cancel:hover {
+  background: #3d3d3d;
+  color: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-modal-btn-confirm {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+}
+
+.confirm-modal-btn-confirm:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 480px) {
+  .confirm-modal {
+    min-width: 90%;
+    padding: 25px 20px;
+  }
+  
+  .confirm-modal-buttons {
+    flex-direction: column;
+  }
+  
+  .confirm-modal-btn {
+    width: 100%;
+  }
+}

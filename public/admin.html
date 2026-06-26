@@ -1,66 +1,152 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- ==================================================================== -->
+    <!-- Magnolia Ping Pong - Page d'Administration Principale                -->
+    <!-- ==================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - PingPong</title>
+    <title>Admin - Magnolia PingPong</title>
+    
+    <!-- ==================================================================== -->
+    <!-- FEUILLES DE STYLE                                                    -->
+    <!-- ==================================================================== -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
-       <header>
-    <h1>🔧 Administration PingPong</h1>
-    <div>
-	<a href="/admin/matches" class="btn-secondary">📋 Historique</a>
-        <a href="/" class="btn-secondary">← Classement</a>
-        <button onclick="logout()" class="btn-logout">Déconnexion</button>
+
+<!-- ==================================================================== -->
+<!-- EN-TÊTE / NAVIGATION                                                 -->
+<!-- ==================================================================== -->
+<header class="main-header">
+    <div class="header-content">
+        
+        <!-- Logo à gauche -->
+        <a href="/admin" class="logo">
+            <img src="/images/logo.png" alt="Magnolia PingPong" class="logo-img">
+        </a>
+        
+        <!-- Menu au milieu -->
+        <nav class="header-nav">
+            <a href="/admin" class="nav-link active">🏠 Accueil</a>
+            <a href="/admin/matches" class="nav-link">📜 Matchs</a>
+            <a href="/" class="nav-link">🌐 Retour au site</a>
+        </nav>
+        
+        <!-- Déconnexion à droite -->
+        <button class="btn-logout" onclick="logout()">🚪 Déconnexion</button>
+        
     </div>
 </header>
-    <div class="container">
+    </header>
 
-
+    <!-- ==================================================================== -->
+    <!-- CONTENU PRINCIPAL                                                    -->
+    <!-- ==================================================================== -->
+    <main class="container">
+        
+        <!-- ================================================================ -->
+        <!-- SECTION : AJOUTER UN JOUEUR                                      -->
+        <!-- ================================================================ -->
         <section class="section">
-            <h2>➕ Ajouter un joueur</h2>
-            <div class="form-group">
-                <input type="text" id="playerName" placeholder="Nom du joueur">
-                <button onclick="addPlayer()" class="btn-primary">Ajouter</button>
+            <h2>👤 Ajouter un joueur</h2>
+            <div class="form-row">
+                <input type="text" id="playerName" placeholder="Nom du joueur" required>
+                <button class="btn-primary" onclick="addPlayer()">Ajouter</button>
             </div>
             <div id="message"></div>
         </section>
 
-<section class="section">
-    <h2>🎯 Enregistrer un match</h2>
-    <div class="match-form">
-        <div class="player-select">
-            <label>Gagnant</label>
-            <select id="winner"></select>
-            <input type="number" id="winnerScore" placeholder="Score" min="0" value="21">
-        </div>
-        
-        <div class="vs">VS</div>
-        
-        <div class="player-select">
-            <label>Perdant</label>
-            <select id="loser"></select>
-            <input type="number" id="loserScore" placeholder="Score" min="0" value="15">
-        </div>
-    </div>
-    <button onclick="recordMatch()" class="btn-primary">Enregistrer le match</button>
-    <div id="matchMessage"></div>
-</section>
-
+        <!-- ================================================================ -->
+        <!-- SECTION : ENREGISTRER UN MATCH                                   -->
+        <!-- ================================================================ -->
         <section class="section">
-            <h2>👥 Liste des joueurs</h2>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Rechercher..." onkeyup="filterPlayers()">
+            <h2>🏓 Enregistrer un match</h2>
+            
+            <!-- Sélecteur de joueurs avec design horizontal -->
+            <div class="match-players-selector">
+                
+                <!-- Carte Gagnant -->
+<div class="player-select-card winner-card">
+    <div class="card-header">
+        <span class="card-icon">🏆</span>
+        <h3>Gagnant</h3>
+    </div>
+    
+    <div class="custom-select-wrapper">
+        <div class="custom-select" id="winnerSelect" data-target="winner">
+            <div class="select-selected placeholder">Sélectionner un joueur</div>
+            <div class="select-arrow"></div>
+            <div class="select-items"></div>
+        </div>
+        <input type="hidden" id="winner" value="">
+    </div>
+    
+    <div class="score-input-wrapper">
+        <label for="winnerScore">Score</label>
+        <input type="number" id="winnerScore" min="0" max="30" placeholder="21" class="score-input">
+    </div>
+</div>
+                
+                <!-- Séparateur VS -->
+                <div class="vs-separator">
+                    <span>VS</span>
+                </div>
+                
+                <!-- Carte Perdant -->
+                <div class="player-select-card loser-card">
+                    <div class="card-header">
+                        <span class="card-icon">💔</span>
+                        <h3>Perdant</h3>
+                    </div>
+                    
+                    <!-- Select personnalisé -->
+                    <div class="custom-select-wrapper">
+                        <div class="custom-select" id="loserSelect" data-target="loser">
+                            <div class="select-selected placeholder">Sélectionner un joueur</div>
+                            <div class="select-arrow"></div>
+                            <div class="select-items"></div>
+                        </div>
+                        <input type="hidden" id="loser" value="">
+                    </div>
+                    
+                    <!-- Score -->
+                    <div class="score-input-wrapper">
+                        <label for="loserScore">Score</label>
+                        <input type="number" id="loserScore" min="0" max="30" placeholder="15" class="score-input">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Message d'erreur dynamique -->
+            <div id="selectionWarning" class="selection-warning" style="display: none;"></div>
+            
+            <!-- Bouton d'enregistrement -->
+            <button class="btn-primary btn-large" onclick="recordMatch()">
+                🏓 Enregistrer le match
+            </button>
+            
+            <div id="matchMessage"></div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECTION : LISTE DES JOUEURS                                      -->
+        <!-- ================================================================ -->
+        <section class="section">
+            <h2>📋 Liste des joueurs</h2>
+            <div class="form-row">
+                <input type="text" id="searchInput" placeholder="🔍 Rechercher un joueur..." oninput="filterPlayers()">
             </div>
             <table id="playersTable">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Nom</th>
                         <th>Elo</th>
-                        <th>Victoires</th>
-                        <th>Défaites</th>
+                        <th>V</th>
+                        <th>D</th>
                         <th>Ratio</th>
                         <th>Actions</th>
                     </tr>
@@ -68,7 +154,12 @@
                 <tbody></tbody>
             </table>
         </section>
-    </div>
-    <script src="/admin.js"></script>
+    </main>
+
+    <!-- ==================================================================== -->
+    <!-- SCRIPTS                                                              -->
+    <!-- ==================================================================== -->
+    <script src="/js/admin.js"></script>
+    <script src="/js/modal.js"></script>
 </body>
 </html>

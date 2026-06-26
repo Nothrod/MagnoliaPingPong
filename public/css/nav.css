@@ -1,137 +1,126 @@
-/* ========================================
-   NAVIGATION COMMUNE - HEADER
-======================================== */
+/**
+ * ============================================================================
+ * Magnolia Ping Pong - Styles de la Navigation Commune
+ * ============================================================================
+ * 
+ * Ce fichier gère :
+ * - Le header principal avec logo et menu
+ * - Le menu burger pour mobile
+ * - Les styles de navigation responsive
+ * 
+ * @author Magnolia Ping Pong
+ * @version 2.0.0
+ * ============================================================================
+ */
 
-/* Reset global */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ============================================================================
+   HEADER PRINCIPAL
+   ============================================================================ */
 
-/* Header principal */
 .main-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(13, 13, 13, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
   border-bottom: 2px solid #FFD700;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 15px rgba(255, 215, 0, 0.15);
+  margin-bottom: 30px;
+  padding: 15px 30px;
+  border-radius: 10px;
 }
 
-.header-container {
-  max-width: 1200px;
+.header-content {
+  max-width: 1600px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  gap: 20px;
 }
 
-/* ========================================
+/* ============================================================================
    LOGO
-======================================== */
+   ============================================================================ */
+
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  flex-shrink: 0;
   text-decoration: none;
-  transition: transform 0.3s;
 }
 
-.logo:hover {
-  transform: scale(1.05);
+.logo-img {
+  height: 150px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
 }
 
-.logo-icon {
-  font-size: 32px;
-  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+.logo-img:hover {
+  transform: scale(1.05) rotate(-5deg);
 }
 
 .logo-text {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #FFD700;
   letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-/* ========================================
+/* ============================================================================
    MENU DE NAVIGATION
-======================================== */
+   ============================================================================ */
+
 .nav-menu {
   display: flex;
+  gap: 15px;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  flex: 1;
 }
 
 .nav-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
   color: #a0a0a0;
   text-decoration: none;
-  border-radius: 8px;
   font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 5px;
   transition: all 0.3s;
-  position: relative;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: #FFD700;
-  transition: all 0.3s;
-  transform: translateX(-50%);
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
   color: #FFD700;
-  background: rgba(255, 215, 0, 0.08);
+  background: rgba(255, 215, 0, 0.1);
+  transform: translateY(-2px);
 }
 
-.nav-link:hover::before {
-  width: 80%;
-}
-
-/* Lien actif (page courante) */
 .nav-link.active {
   color: #FFD700;
-  background: rgba(255, 215, 0, 0.12);
+  background: rgba(255, 215, 0, 0.15);
+  border-bottom: 2px solid #FFD700;
 }
 
-.nav-link.active::before {
-  width: 80%;
-}
+/* ============================================================================
+   BOUTON ADMIN
+   ============================================================================ */
 
-.nav-icon {
-  font-size: 18px;
-}
-
-/* Bouton Admin */
 .btn-admin {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
   color: #0d0d0d !important;
   padding: 10px 20px;
-  border-radius: 8px;
+  border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
   transition: all 0.3s;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+  white-space: nowrap;
 }
 
 .btn-admin:hover {
@@ -140,9 +129,19 @@
   box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
-/* ========================================
+/* ============================================================================
+   ESPACEUR POUR ÉQUILIBRER
+   ============================================================================ */
+
+.header-spacer {
+  width: 120px;
+  flex-shrink: 0;
+}
+
+/* ============================================================================
    MENU BURGER (MOBILE)
-======================================== */
+   ============================================================================ */
+
 .burger-menu {
   display: none;
   flex-direction: column;
@@ -163,7 +162,6 @@
   transition: all 0.3s;
 }
 
-/* Animation du burger en X */
 .burger-menu.active span:nth-child(1) {
   transform: rotate(45deg) translate(6px, 6px);
 }
@@ -176,16 +174,23 @@
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* ========================================
+/* ============================================================================
    RESPONSIVE - MOBILE
-======================================== */
+   ============================================================================ */
+
 @media (max-width: 768px) {
-  /* Afficher le burger sur mobile */
+  .main-header {
+    padding: 15px 20px;
+  }
+  
   .burger-menu {
     display: flex;
   }
   
-  /* Menu en sidebar à droite */
+  .header-spacer {
+    display: none;
+  }
+  
   .nav-menu {
     position: fixed;
     top: 0;
@@ -201,14 +206,13 @@
     transition: right 0.3s ease;
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
     border-left: 2px solid #FFD700;
+    z-index: 100;
   }
   
-  /* Menu ouvert */
   .nav-menu.active {
     right: 0;
   }
   
-  /* Liens en pleine largeur */
   .nav-link,
   .btn-admin {
     justify-content: flex-start;
@@ -216,26 +220,29 @@
     border-radius: 8px;
   }
   
-  /* Pas de soulignement en mobile */
   .nav-link::before {
     display: none;
   }
   
-  /* Lien actif avec bordure gauche */
   .nav-link.active {
     background: rgba(255, 215, 0, 0.15);
     border-left: 3px solid #FFD700;
+    border-bottom: none;
   }
   
-  /* Overlay sombre quand menu ouvert */
-  .nav-menu.active::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+  .logo-text {
+    font-size: 16px;
+  }
+  
+  .logo-img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-link,
+  .btn-admin {
+    padding: 12px 15px;
+    font-size: 13px;
   }
 }
