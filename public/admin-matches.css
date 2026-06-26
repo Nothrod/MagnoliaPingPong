@@ -1,0 +1,139 @@
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filters input,
+.filters select {
+  flex: 1;
+  min-width: 200px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  margin: 5% auto;
+  padding: 0;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 0 1px #2d2d2d;
+  animation: slideDown 0.3s;
+  border-top: 3px solid #FFD700;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 2px solid #2d2d2d;
+}
+
+.modal-header h2 {
+  color: #FFD700;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.close {
+  color: #a0a0a0;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #ef4444;
+}
+
+.modal-body {
+  padding: 25px;
+  color: #f5f5f5;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-edit {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #0d0d0d;
+  padding: 6px 12px;
+  font-size: 14px;
+  margin-right: 5px;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.btn-edit:hover {
+  background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+  transform: translateY(-1px);
+}
+
+.winner-cell {
+  color: #10b981;
+  font-weight: bold;
+}
+
+.loser-cell {
+  color: #ef4444;
+}
+
+.score-cell {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFD700;
+}
+
+.elo-positive {
+  color: #10b981;
+  font-weight: bold;
+}
+
+.elo-negative {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+  .match-form {
+    flex-direction: column;
+  }
+  .vs {
+    text-align: center;
+  }
+}

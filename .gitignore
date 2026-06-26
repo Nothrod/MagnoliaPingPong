@@ -1,0 +1,43 @@
+# ==========================================
+# VARIABLES D'ENVIRONNEMENT (CRITIQUE)
+# ==========================================
+.env
+.env.local
+.env.*.local
+
+# ==========================================
+# DÉPENDANCES NODE
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json  # (à garder si tu veux figer les versions, sinon ignore-le)
+
+# ==========================================
+# BASE DE DONNÉES SQLITE
+# ==========================================
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.db-wal
+*.db-shm
+/data/
+
+# ==========================================
+# BUILD & TEMP
+# ==========================================
+dist/
+build/
+.cache/
+*.log
+
+# ==========================================
+# ÉDITEURS & OS
+# ==========================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp

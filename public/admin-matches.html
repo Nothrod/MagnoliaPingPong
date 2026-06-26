@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des matchs - PingPong Admin</title>
+    <link rel="stylesheet" href="/admin.css">
+    <link rel="stylesheet" href="/admin-matches.css">
+</head>
+<body>
+
+ <header>
+    <h1>📋 Historique des matchs</h1>
+    <div>
+	<a href="/admin" class="btn-secondary">🏠 Accueil</a>
+        <a href="/" class="btn-secondary">← Classement</a>
+        <button onclick="logout()" class="btn-logout">Déconnexion</button>
+    </div>
+</header>
+
+    <div class="container">
+
+        <section class="section">
+            <div class="filters">
+                <input type="text" id="searchInput" placeholder="Rechercher un joueur..." onkeyup="filterMatches()">
+                <select id="filterPlayer" onchange="filterMatches()">
+                    <option value="">Tous les joueurs</option>
+                </select>
+            </div>
+            
+            <table id="matchesTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Gagnant</th>
+                        <th>Score</th>
+                        <th>Perdant</th>
+                        <th>Elo Change</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Modal de modification -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ Modifier le match</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editMatchId">
+                <div class="match-form">
+                    <div class="player-select">
+                        <label>Gagnant</label>
+                        <select id="editWinner"></select>
+                        <input type="number" id="editWinnerScore" placeholder="Score" min="0">
+                    </div>
+                    
+                    <div class="vs">VS</div>
+                    
+                    <div class="player-select">
+                        <label>Perdant</label>
+                        <select id="editLoser"></select>
+                        <input type="number" id="editLoserScore" placeholder="Score" min="0">
+                    </div>
+                </div>
+                <div id="editMessage"></div>
+                <div class="modal-footer">
+                    <button onclick="closeModal()" class="btn-secondary">Annuler</button>
+                    <button onclick="updateMatch()" class="btn-primary">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin-matches.js"></script>
+</body>
+</html>

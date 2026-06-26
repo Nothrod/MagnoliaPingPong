@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PingPong Admin</title>
+    <link rel="stylesheet" href="/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>🔐 Administration PingPong</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" placeholder="Mot de passe admin" required>
+                </div>
+                <button type="submit" class="btn-primary">Se connecter</button>
+                <div id="message"></div>
+            </form>
+            <a href="/" class="link-back">← Retour au classement</a>
+        </div>
+    </div>
+    <script src="/login.js"></script>
+</body>
+</html>

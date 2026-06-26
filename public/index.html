@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PingPong - Classement Elo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="main-header">
+  <div class="header-container">
+    <!-- Logo à gauche -->
+    <a href="/" class="logo">
+      <span class="logo-icon">🏆</span>
+      <span class="logo-text">EloTracker</span>
+    </a>
+
+    <!-- Navigation à droite -->
+    <nav class="nav-menu">
+      <a href="/" class="nav-link active">
+        <span class="nav-icon">📊</span>
+        <span>Classement</span>
+      </a>
+      <a href="/matchs" class="nav-link">
+        <span class="nav-icon">⚔️</span>
+        <span>Matchs</span>
+      </a>
+      <a href="/admin/login.php" class="btn-admin">
+        <span class="nav-icon">🔐</span>
+        <span>Admin</span>
+      </a>
+    </nav>
+
+    <!-- Bouton burger pour mobile -->
+    <button class="burger-menu" id="burgerMenu" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+    <div class="container">
+        <section class="section">
+            <h2>📊 Classement</h2>
+            <table id="leaderboard">
+                <thead>
+    <tr>
+        <th>#</th>
+        <th>Joueur</th>
+        <th>Elo</th>
+        <th>V</th>
+        <th>D</th>
+        <th>Ratio</th>
+        <th>Points</th>
+    </tr>
+</thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </div>
+    <script src="/app.js"></script>
+<script>
+  const burgerMenu = document.getElementById('burgerMenu');
+  const navMenu = document.querySelector('.nav-menu');
+
+  burgerMenu?.addEventListener('click', () => {
+    burgerMenu.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+
+  // Fermer le menu quand on clique sur un lien (mobile)
+  document.querySelectorAll('.nav-link, .btn-admin').forEach(link => {
+    link.addEventListener('click', () => {
+      burgerMenu?.classList.remove('active');
+      navMenu?.classList.remove('active');
+    });
+  });
+</script>
+</body>
+</html>
