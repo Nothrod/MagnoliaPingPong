@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historique des matchs - PingPong Admin</title>
-    <link rel="stylesheet" href="/admin.css">
-    <link rel="stylesheet" href="/admin-matches.css">
+    
+    <!-- ✅ Chemins ABSOLUS (commencent par /) -->
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-matches.css">
 </head>
 <body>
 
- <header>
-    <h1>📋 Historique des matchs</h1>
-    <div>
-	<a href="/admin" class="btn-secondary">🏠 Accueil</a>
-        <a href="/" class="btn-secondary">← Classement</a>
-        <button onclick="logout()" class="btn-logout">Déconnexion</button>
-    </div>
-</header>
+    <header>
+        <h1>📋 Historique des matchs</h1>
+        <div>
+            <a href="/admin" class="btn-secondary">🏠 Accueil</a>
+            <a href="/" class="btn-secondary">← Classement</a>
+            <button onclick="logout()" class="btn-logout">Déconnexion</button>
+        </div>
+    </header>
 
     <div class="container">
-
         <section class="section">
             <div class="filters">
                 <input type="text" id="searchInput" placeholder="Rechercher un joueur..." onkeyup="filterMatches()">
@@ -78,6 +79,7 @@
         </div>
     </div>
 
-    <script src="/admin-matches.js"></script>
+    <!-- ✅ Vérifie aussi le chemin du script JS -->
+    <script src="/js/admin-matches.js"></script>
 </body>
 </html>

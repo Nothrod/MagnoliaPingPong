@@ -1,0 +1,241 @@
+/* ========================================
+   NAVIGATION COMMUNE - HEADER
+======================================== */
+
+/* Reset global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header principal */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 2px solid #FFD700;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+/* ========================================
+   LOGO
+======================================== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-icon {
+  font-size: 32px;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   MENU DE NAVIGATION
+======================================== */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  color: #a0a0a0;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #FFD700;
+  transition: all 0.3s;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover {
+  color: #FFD700;
+  background: rgba(255, 215, 0, 0.08);
+}
+
+.nav-link:hover::before {
+  width: 80%;
+}
+
+/* Lien actif (page courante) */
+.nav-link.active {
+  color: #FFD700;
+  background: rgba(255, 215, 0, 0.12);
+}
+
+.nav-link.active::before {
+  width: 80%;
+}
+
+.nav-icon {
+  font-size: 18px;
+}
+
+/* Bouton Admin */
+.btn-admin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #0d0d0d !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+}
+
+.btn-admin:hover {
+  background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+/* ========================================
+   MENU BURGER (MOBILE)
+======================================== */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 101;
+}
+
+.burger-menu span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #FFD700;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+
+/* Animation du burger en X */
+.burger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.burger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+@media (max-width: 768px) {
+  /* Afficher le burger sur mobile */
+  .burger-menu {
+    display: flex;
+  }
+  
+  /* Menu en sidebar à droite */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 300px;
+    height: 100vh;
+    background: #1a1a1a;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 80px 20px 20px;
+    gap: 5px;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+    border-left: 2px solid #FFD700;
+  }
+  
+  /* Menu ouvert */
+  .nav-menu.active {
+    right: 0;
+  }
+  
+  /* Liens en pleine largeur */
+  .nav-link,
+  .btn-admin {
+    justify-content: flex-start;
+    padding: 15px 20px;
+    border-radius: 8px;
+  }
+  
+  /* Pas de soulignement en mobile */
+  .nav-link::before {
+    display: none;
+  }
+  
+  /* Lien actif avec bordure gauche */
+  .nav-link.active {
+    background: rgba(255, 215, 0, 0.15);
+    border-left: 3px solid #FFD700;
+  }
+  
+  /* Overlay sombre quand menu ouvert */
+  .nav-menu.active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+}

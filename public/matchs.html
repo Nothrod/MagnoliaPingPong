@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Métadonnées de base -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Historique des matchs de ping-pong avec suivi Elo">
   <title>Matchs - EloTracker</title>
-  <link rel="stylesheet" href="matchs.css">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/matchs.css">
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ============================================ -->
+  <!-- HEADER / NAVIGATION PRINCIPALE               -->
+  <!-- ============================================ -->
   <header class="main-header">
     <div class="header-container">
+      <!-- Logo avec lien vers l'accueil -->
       <a href="/" class="logo">
         <span class="logo-icon">🏆</span>
         <span class="logo-text">EloTracker</span>
       </a>
-      <nav class="nav-menu">
-        <a href="/classement" class="nav-link">
-          <span class="nav-icon">📊</span>
-          <span>Classement</span>
-        </a>
-        <a href="/matchs" class="nav-link active">
-          <span class="nav-icon">⚔️</span>
-          <span>Matchs</span>
-        </a>
-        <a href="/admin/login.php" class="btn-admin">
-          <span class="nav-icon">🔐</span>
-          <span>Admin</span>
-        </a>
-      </nav>
+      
+      <!-- Menu de navigation -->
+<div id="nav-placeholder"></div>
+      
+      <!-- Menu burger pour mobile -->
       <button class="burger-menu" id="burgerMenu" aria-label="Menu">
         <span></span>
         <span></span>
@@ -37,15 +35,21 @@
     </div>
   </header>
 
-  <!-- CONTENU PRINCIPAL -->
+  <!-- ============================================ -->
+  <!-- CONTENU PRINCIPAL                            -->
+  <!-- ============================================ -->
   <main class="matches-page">
+    <!-- En-tête de page -->
     <div class="page-header">
       <h1>⚔️ Historique des Matchs</h1>
       <p class="subtitle">Retrouve tous les affrontements et leurs résultats</p>
     </div>
 
-    <!-- STATS RAPIDES -->
+    <!-- ============================================ -->
+    <!-- SECTION STATISTIQUES RAPIDES                 -->
+    <!-- ============================================ -->
     <section class="stats-grid">
+      <!-- Total des matchs -->
       <div class="stat-card">
         <div class="stat-icon">🎯</div>
         <div class="stat-info">
@@ -53,6 +57,8 @@
           <div class="stat-label">Matchs totaux</div>
         </div>
       </div>
+      
+      <!-- Matchs du jour -->
       <div class="stat-card">
         <div class="stat-icon">🔥</div>
         <div class="stat-info">
@@ -60,6 +66,8 @@
           <div class="stat-label">Aujourd'hui</div>
         </div>
       </div>
+      
+      <!-- Joueur avec le plus de victoires -->
       <div class="stat-card">
         <div class="stat-icon">👑</div>
         <div class="stat-info">
@@ -67,6 +75,8 @@
           <div class="stat-label">Plus de victoires</div>
         </div>
       </div>
+      
+      <!-- Elo moyen -->
       <div class="stat-card">
         <div class="stat-icon">⚡</div>
         <div class="stat-info">
@@ -76,13 +86,18 @@
       </div>
     </section>
 
-    <!-- FILTRES -->
+    <!-- ============================================ -->
+    <!-- SECTION FILTRES                              -->
+    <!-- ============================================ -->
     <section class="filters-section">
       <div class="filters">
+        <!-- Filtre par joueur -->
         <div class="filter-group">
           <label for="searchPlayer">🔍 Joueur</label>
           <input type="text" id="searchPlayer" placeholder="Rechercher un joueur...">
         </div>
+        
+        <!-- Filtre par période -->
         <div class="filter-group">
           <label for="filterDate">📅 Période</label>
           <select id="filterDate">
@@ -92,6 +107,8 @@
             <option value="month">Ce mois</option>
           </select>
         </div>
+        
+        <!-- Tri des matchs -->
         <div class="filter-group">
           <label for="sortBy">🔃 Trier par</label>
           <select id="sortBy">
@@ -103,15 +120,20 @@
       </div>
     </section>
 
-    <!-- LISTE DES MATCHS -->
+    <!-- ============================================ -->
+    <!-- LISTE DES MATCHS                             -->
+    <!-- ============================================ -->
     <section class="matches-list" id="matchesList">
+      <!-- État de chargement -->
       <div class="loading-state">
         <div class="loading-spinner"></div>
         <p>Chargement des matchs...</p>
       </div>
     </section>
 
-    <!-- ÉTAT VIDE -->
+    <!-- ============================================ -->
+    <!-- ÉTAT VIDE (aucun match trouvé)               -->
+    <!-- ============================================ -->
     <div class="empty-state" id="emptyState" style="display: none;">
       <div class="empty-icon">🎮</div>
       <h3>Aucun match trouvé</h3>
@@ -119,17 +141,23 @@
     </div>
   </main>
 
-  <!-- MODAL DÉTAIL MATCH -->
+  <!-- ============================================ -->
+  <!-- MODAL DÉTAIL D'UN MATCH                      -->
+  <!-- ============================================ -->
   <div class="modal" id="matchModal">
     <div class="modal-content">
       <div class="modal-header">
         <h2>📋 Détails du match</h2>
         <span class="close" id="closeModal">&times;</span>
       </div>
-      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-body" id="modalBody">
+        <!-- Contenu dynamique injecté par matchs.js -->
+      </div>
     </div>
   </div>
 
+  <!-- Script JavaScript -->
   <script src="matchs.js"></script>
+<script src="/js/nav.js"></script>
 </body>
 </html>

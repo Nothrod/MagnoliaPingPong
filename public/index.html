@@ -4,33 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PingPong - Classement Elo</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header class="main-header">
-  <div class="header-container">
-    <!-- Logo à gauche -->
-    <a href="/" class="logo">
-      <span class="logo-icon">🏆</span>
-      <span class="logo-text">EloTracker</span>
-    </a>
-
-    <!-- Navigation à droite -->
-    <nav class="nav-menu">
-      <a href="/" class="nav-link active">
-        <span class="nav-icon">📊</span>
-        <span>Classement</span>
-      </a>
-      <a href="/matchs" class="nav-link">
-        <span class="nav-icon">⚔️</span>
-        <span>Matchs</span>
-      </a>
-      <a href="/admin/login.php" class="btn-admin">
-        <span class="nav-icon">🔐</span>
-        <span>Admin</span>
-      </a>
-    </nav>
+<div id="nav-placeholder"></div>
 
     <!-- Bouton burger pour mobile -->
     <button class="burger-menu" id="burgerMenu" aria-label="Menu">
@@ -78,5 +56,6 @@
     });
   });
 </script>
+ <script src="/js/nav.js"></script>
 </body>
 </html>
