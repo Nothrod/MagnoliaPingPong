@@ -6,10 +6,12 @@
  * Ce fichier gère :
  * - L'affichage du classement public des joueurs
  * - Le calcul des statistiques (ratio victoires/défaites, ratio points)
+ * - Le tri intelligent (joueurs actifs d'abord, puis nouveaux)
+ * - L'affichage spécial du top 3 avec médailles
  * - Le rafraîchissement automatique toutes les 30 secondes
  * 
  * @author Magnolia Ping Pong
- * @version 2.0.0
+ * @version 3.0.0
  * ============================================================================
  */
 
@@ -19,8 +21,8 @@
 
 /**
  * Charge le classement des joueurs depuis l'API
- * Trie par ELO décroissant (déjà fait côté serveur)
- * Affiche les statistiques pour chaque joueur
+ * Trie intelligemment : joueurs actifs d'abord, puis nouveaux
+ * Affiche le top 3 avec médailles
  */
 async function loadLeaderboard() {
     try {
@@ -40,8 +42,27 @@ async function loadLeaderboard() {
             return;
         }
         
-        // Générer les lignes du tableau
-        tbody.innerHTML = players.map((p, i) => {
+        // =========================================================================
+        // TRI INTELLIGENT
+        // =========================================================================
+        // 1. Séparer les joueurs actifs (au moins 1 match) des nouveaux (0 match)
+        // 2. Trier chaque groupe par Elo décroissant
+        // 3. Concaténer : actifs d'abord, puis nouveaux
+        
+        const activePlayers = players.filter(p => (p.wins + p.losses) > 0)
+            .sort((a, b) => b.elo - a.elo);
+        
+        const newPlayers = players.filter(p => (p.wins + p.losses) === 0)
+            .sort((a, b) => b.elo - a.elo);
+        
+        const sortedPlayers = [...activePlayers, ...newPlayers];
+        
+        // =========================================================================
+        // AFFICHAGE AVEC TOP 3 SPÉCIAL
+        // =========================================================================
+        tbody.innerHTML = sortedPlayers.map((p, i) => {
+            const rank = i + 1;
+            
             // Calcul du ratio victoires/défaites
             const totalGames = p.wins + p.losses;
             const ratio = totalGames > 0 ? ((p.wins / totalGames) * 100).toFixed(1) : '0.0';
@@ -55,15 +76,43 @@ async function loadLeaderboard() {
             // Couleur du ratio selon performance
             const ratioClass = ratio >= 50 ? 'ratio-good' : 'ratio-bad';
             
+            // =========================================================================
+            // TOP 3 : Médailles et classes spéciales
+            // =========================================================================
+            let rankDisplay = rank;
+            let rowClass = '';
+            let nameDisplay = p.name;
+            
+            if (rank === 1) {
+                rankDisplay = '🥇';
+                rowClass = 'rank-1';
+                nameDisplay = `<strong class="gold-name">${p.name}</strong>`;
+            } else if (rank === 2) {
+                rankDisplay = '🥈';
+                rowClass = 'rank-2';
+                nameDisplay = `<strong class="silver-name">${p.name}</strong>`;
+            } else if (rank === 3) {
+                rankDisplay = '🥉';
+                rowClass = 'rank-3';
+                nameDisplay = `<strong class="bronze-name">${p.name}</strong>`;
+            } else {
+                nameDisplay = `<strong>${p.name}</strong>`;
+            }
+            
+            // Indicateur pour les nouveaux joueurs (0 match)
+            const newPlayerBadge = totalGames === 0 
+                ? '<span class="new-badge">NEW</span>' 
+                : '';
+            
             return `
-                <tr>
-                    <td>${i + 1}</td>
-                    <td><strong>${p.name}</strong></td>
-                    <td>${p.elo}</td>
+                <tr class="${rowClass}">
+                    <td class="rank-cell">${rankDisplay}</td>
+                    <td>${nameDisplay} ${newPlayerBadge}</td>
+                    <td class="elo-cell">${p.elo}</td>
                     <td>${p.wins}</td>
                     <td>${p.losses}</td>
-                    <td class="${ratioClass}">${ratio}%</td>
-                    <td>${p.points_won}-${p.points_lost} (${pointsRatio}%)</td>
+                    <td class="${ratioClass}">${totalGames > 0 ? ratio + '%' : '-'}</td>
+                    <td>${totalPoints > 0 ? `${p.points_won}-${p.points_lost} (${pointsRatio}%)` : '-'}</td>
                 </tr>
             `;
         }).join('');
